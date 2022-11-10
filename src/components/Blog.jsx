@@ -12,6 +12,12 @@ export default class Blog extends Component {
     };
   }
 
+  handleNavigation = (id) => {
+    this.setState({
+      currentPost: id,
+    });
+  };
+
   componentDidMount() {
     getPosts().then((posts) =>
       this.setState({
@@ -23,8 +29,13 @@ export default class Blog extends Component {
   render() {
     return (
       <>
-        <SideBar posts={this.state.posts} />
-        { this.state.posts && <PostContainer data={this.state.posts[this.state.currentPost]} />}
+        <SideBar
+          posts={this.state.posts}
+          handleNavigation={this.handleNavigation}
+        />
+        {this.state.posts && (
+          <PostContainer data={this.state.posts[this.state.currentPost]} />
+        )}
       </>
     );
   }
