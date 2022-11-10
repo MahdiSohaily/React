@@ -1,13 +1,13 @@
 import React from 'react';
+import Link from './Link';
 
-export default function SideBar() {
+export default function SideBar({ posts }) {
+  const navLinks = posts && posts.map((item, index) => (
+    <Link key={index} title={item.title} />
+  ));
   return (
     <aside>
-      <ul>
-        <li>Post 1</li>
-        <li>Post 2</li>
-        <li>Post 3</li>
-      </ul>
+      <ul>{navLinks}</ul>
     </aside>
   );
 }
