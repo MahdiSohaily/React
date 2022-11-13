@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Arrow from './Arrow';
 import Card from './Card';
+import Counter from './Counter';
 
 export default function Slider() {
   const [cards, setCards] = useState([]);
@@ -43,6 +44,7 @@ export default function Slider() {
             <Arrow handleCurrentCard={handleCurrentCard} type={'prev'} />
             <Card display={cards[current]} />
             <Arrow handleCurrentCard={handleCurrentCard} type={'next'} />
+            <Counter />
           </>
         ) : (
           <p> Loading </p>
