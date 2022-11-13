@@ -9,7 +9,7 @@ export default function Card({ display }) {
     <div className="clash-card barbarian">
       <CardHeader name={name} img={img} />
       <CardBody name={name} level={level} description={description} />
-      <CardFooter units={units} />
+      <CardFooter name={name} units={units} />
     </div>
   );
 }
