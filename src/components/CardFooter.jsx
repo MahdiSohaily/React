@@ -1,24 +1,13 @@
 import React from 'react';
+import Unite from './Unite';
 
-export default function CardFooter() {
+export default function CardFooter({ units }) {
+  const items = units.map((item) => (
+    <Unite value={item.value} state={item.state} />
+  ));
   return (
     <div className="clash-card__unit-stats clash-card__unit-stats--barbarian clearfix">
-      <div className="one-third">
-        <div className="stat">
-          20<sup>S</sup>
-        </div>
-        <div className="stat-value">Training</div>
-      </div>
-
-      <div className="one-third">
-        <div className="stat">16</div>
-        <div className="stat-value">Speed</div>
-      </div>
-
-      <div className="one-third no-border">
-        <div className="stat">150</div>
-        <div className="stat-value">Cost</div>
-      </div>
+      {items}
     </div>
   );
 }
