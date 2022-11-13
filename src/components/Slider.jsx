@@ -3,23 +3,44 @@ import Arrow from './Arrow';
 import Card from './Card';
 
 export default function Slider() {
-  const [card, setCard] = useState([]);
+  const [cards, setCards] = useState([]);
   const [current, setCurrent] = useState(0);
 
   async function fetchData() {
-    const response = fetch()
+    const response = await fetch('http://localhost:3001/heroes');
+    const data = await response.json();
+    return data;
   }
 
-  useEffect(()=>{
+  useEffect(() => {
+    fetchData().then((data) => setCards(data));
+  }, []);
 
-  });
+  const handleCurrentCard = (dir) => {
+    const cardsCount = cards.length;
+    switch (dir) {
+      case 'prev': {
+        const index = current - 1 >= 0 ? current - 1 : cardsCount - 1;
+        setCurrent(index);
+        break;
+      }
+      case 'next': {
+        console.log('next');
+        const index = current + 1 >= cardsCount ? 0 : current + 1;
+        setCurrent(index);
+        break;
+      }
+      default:
+        throw Error('Wrong value passed');
+    }
+  };
 
   return (
     <div className="slide-container">
       <div className="wrapper">
-        <Arrow type={'prev'} />
+        <Arrow handleCurrentCard={handleCurrentCard} type={'prev'} />
         <Card />
-        <Arrow type={'next'} />
+        <Arrow handleCurrentCard={handleCurrentCard} type={'next'} />
       </div>
     </div>
   );

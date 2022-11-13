@@ -5,7 +5,7 @@ import CardFooter from './CardFooter';
 
 export default function Card() {
   return (
-    <div class="clash-card barbarian">
+    <div className="clash-card barbarian">
       <CardHeader />
       <CardBody />
       <CardFooter />

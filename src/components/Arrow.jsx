@@ -1,11 +1,16 @@
 import React from 'react';
 
-export default function Arrow({ type }) {
+export default function Arrow({ type, handleCurrentCard }) {
   return (
-    <div class="arrow-wrapper">
-      <div class="round">
+    <div
+      className="arrow-wrapper"
+      onClick={() => {
+        handleCurrentCard(type);
+      }}
+    >
+      <div className="round">
         <div id="cta">
-          <span class={`arrow ${type}`}></span>
+          <span className={`arrow ${type}`}></span>
         </div>
       </div>
     </div>
