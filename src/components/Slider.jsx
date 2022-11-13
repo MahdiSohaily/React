@@ -38,9 +38,15 @@ export default function Slider() {
   return (
     <div className="slide-container">
       <div className="wrapper">
-        <Arrow handleCurrentCard={handleCurrentCard} type={'prev'} />
-        <Card />
-        <Arrow handleCurrentCard={handleCurrentCard} type={'next'} />
+        {cards.length > 0 ? (
+          <>
+            <Arrow handleCurrentCard={handleCurrentCard} type={'prev'} />
+            <Card display={cards[current]} />
+            <Arrow handleCurrentCard={handleCurrentCard} type={'next'} />
+          </>
+        ) : (
+          <p> Loading </p>
+        )}
       </div>
     </div>
   );
