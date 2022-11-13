@@ -6,6 +6,14 @@ export default function Slider() {
   const [card, setCard] = useState([]);
   const [current, setCurrent] = useState(0);
 
+  async function fetchData() {
+    const response = fetch()
+  }
+
+  useEffect(()=>{
+
+  });
+
   return (
     <div className="slide-container">
       <div className="wrapper">
