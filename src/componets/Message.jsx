@@ -1,24 +1,62 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 import Loading from './Loading/Loading';
 import Toast from './Toast/';
 
-export default function Message() {
-  const [postID, setPostID] = useState(1);
-  const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(true);
+const initState = {
+  postID: 1,
+  message: '',
+  title: '',
+  loading: true,
+};
 
+function reducer(state, payload) {
+  switch (payload.action) {
+    case 'SUCCESS-REQUEST':
+      return {
+        ...state,
+        message: payload.message,
+        title: payload.title,
+        loading: payload.loading,
+      };
+    case 'MAKE-REQUEST':
+      return {
+        ...state,
+        postID: payload.postID,
+        loading: payload.loading,
+      };
+    default:
+      return {
+        ...state,
+      };
+  }
+}
+
+export default function Message() {
+  const [state, dispatch] = useReducer(reducer, initState);
   useEffect(() => {
     setTimeout(() => {
-      setMessage('Post received Successfully' + Math.random());
-      setLoading(false);
+      const title = 'Post received Successfully' + Math.random();
+      dispatch({
+        action: 'SUCCESS-REQUEST',
+        payload: {
+          message: title,
+          title: title,
+          loading: false,
+        },
+      });
     }, 2000);
-  }, [postID]);
+  }, [state, state.postID]);
 
   function handleChange(e) {
     const { value } = e.target;
     if (value >= 0) {
-      setPostID(value);
-      setLoading(true);
+      dispatch({
+        action: 'MAKE-REQUEST',
+        payload: {
+          postID: value,
+          loading: true,
+        },
+      });
       return true;
     }
     alert(`post ID can't be negative number `);
@@ -26,19 +64,19 @@ export default function Message() {
 
   return (
     <>
-      <h1>{`New post Displayed with ID ${Math.random()}`}</h1>
+      <h1>{state.title}</h1>
       <label>
         {' Post ID: '}
         <input
           type="number"
           name="postID"
-          value={postID}
+          value={state.postID}
           min={0}
           onChange={handleChange}
         />
       </label>
-      {loading && <Loading />}
-      <Toast type="success" message={message} />
+      {state.loading && <Loading />}
+      <Toast type="success" message={state.message} />
     </>
   );
 }
