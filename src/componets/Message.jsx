@@ -38,24 +38,20 @@ export default function Message() {
       const title = 'Post received Successfully' + Math.random();
       dispatch({
         action: 'SUCCESS-REQUEST',
-        payload: {
-          message: title,
-          title: title,
-          loading: false,
-        },
+        message: title,
+        title: title,
+        loading: false,
       });
     }, 2000);
-  }, [state, state.postID]);
+  }, [state.postID]);
 
   function handleChange(e) {
     const { value } = e.target;
     if (value >= 0) {
       dispatch({
         action: 'MAKE-REQUEST',
-        payload: {
-          postID: value,
-          loading: true,
-        },
+        postID: value,
+        loading: true,
       });
       return true;
     }
